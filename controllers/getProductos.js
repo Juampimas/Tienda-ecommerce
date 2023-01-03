@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import Productos from "../models/Producto.js"
+import Producto from "../models/Producto.js"
 
 const getProductos = async (req,res) => {
-  const productos = await Productos.find();
+  const productos = await Producto.find();
   res.render("index", {productos})
 }
 
