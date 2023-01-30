@@ -39,6 +39,12 @@ body{
     cursor: pointer;
     padding: 1em 2em;
 }
+.confirmacion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
 li {
     color: #000;
     list-style: none;
