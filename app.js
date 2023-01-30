@@ -1,26 +1,34 @@
 // modulos
 import express from "express"
-import mongoose from "mongoose"
+import cookieParser from "cookie-parser";
 import session from "express-session"
 import passport from "passport"
-import PassportLocal from "passport-local"
-import sfs from "session-file-store"
+import flash from "connect-flash"
+import MongoStore from "connect-mongo";
+import http from "http"
+import { createTransport } from "nodemailer";
+import {Server} from 'socket.io';
 
-// archivos
-import database from "./config/database.js"
-import indexRoutes from "./routes/index.js"
-import getProductos from "./controllers/getProductos.js"
-
-const app = express();
-
-// db connection
-mongoose.connect(database);
-let db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-    console.log(`Conectado a MongoDB: ${database}`);
+// Nodemailer
+export const transporter = createTransport({
+  service: 'gmail',
+  port: 587,
+  auth: {
+      user: "juampim98@gmail.com",
+      pass: 'kmjpamxvfmqjnojz'
+  }
 });
 
+// archivos
+import indexRoutes from "./routes/index.js"
+
+// Inicializaciones
+import "./passport/local-auth.js"
+import "./config/database.js"
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server)
 
 // settings
 app.set("views", "./views");
@@ -30,95 +38,45 @@ app.set("view engine", "ejs");
 app.use(express.static("./public"));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
-app.use(indexRoutes);
-
-
-// Session
-let LocalStrategy = PassportLocal.Strategy;
-const FileStore = sfs(session);
-const store = new FileStore({ path: "./sesiones", ttl: 300, retries:0 })
-
+app.use(cookieParser())
 app.use(session({
-  secret: 'keyboard cat',
+  secret: "misesionsecreta",
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
+  saveUninitialized: false,
+  store: MongoStore.create({mongoUrl:'mongodb://localhost:27017/ecommerce'}),
+  cookie: {maxAge: 180 * 60 * 1000}
 }))
-
-// Passport
+app.use(flash());
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); 
+app.use((req, res, next) => {
+  app.locals.registroMensaje = req.flash("registroMensaje");
+  app.locals.loginMensaje1 = req.flash("loginMensaje1");
+  app.locals.loginMensaje2 = req.flash("loginMensaje2");
+  app.locals.exito = req.flash("exito");
+  res.locals.session = req.session;
+  next();
+})
 
-passport.use(new LocalStrategy(function(username,password,done){
-  if (username === "Juan Pablo" && password === "123456"){
-    return done(null, {id:1, nombre:username})
-  } else{
-    done(null, false)
-  }
-}))
-
-passport.serializeUser(function(user,done){
-  done(null,user.id)
-});
-
-passport.deserializeUser(function(id,done){
-  done(null,{id:1, nombre:"juan"})
-});
 
 // routes
-app.use("/", getProductos)
-
-app.get("/",(req,res,next)=>{
-  if (req.isAuthenticated()){
-    return next()
-  } else {
-    res.redirect("/register")
-  }
-}, (req,res) => {
-    res.render("index")
-})
-
-app.get("/register", (req,res) => {
-  res.render("register")
-})
-
-app.post("/register", (req,res) => {
-  res.redirect("/login")
-})
-
-app.get("/login", (req,res) => {
-  res.render("login")
-})
-
-app.post("/login", (req,res) => {
-  const nombre = req.body.nombre;
-  req.session.user = nombre;
-  req.session.admin = true;
-  console.log(req.session);
-  res.render("index")
-})
-
-app.post("/login", passport.authenticate("local",{
-  successRedirect:"/",
-  failureRedirect:"/login"
-}));
-
-app.get("/logout", (req,res) => {
-  req.session.destroy(err => {
-    if (err) {
-        res.json({ status: 'Logout ERROR', body: err })
-    } else {
-          res.redirect("/")
-      }
-  })
-});
-
-
-
+app.use(indexRoutes);
 
 // port
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`El servidor se está escuchando por el puerto ${port}`);
+})
+
+// const io = new IOServer(servidor);
+
+
+// websockets
+// const socket = io()
+
+io.on("connection", (socket) => {
+  socket.on("chat", (msg) => {
+    io.emit("chat", msg)
+  })
 })

@@ -1,4 +1,4 @@
-/* Login */
+/* Register */
 *{
     margin: 0;
     padding: 0;
@@ -6,8 +6,8 @@
 }
 
 body{
-    background-image: url("../imgs/login-bg.jpg");
-    background-position: top;
+    background-image: url("../imgs/register-bg.jpg");
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
