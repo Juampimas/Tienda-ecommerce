@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles/style.css">
+        <title>Tienda</title>
+    </head>
+    <body>
+        <%- include("./partials/header") %>  
+        <h2 class="confirmacion" style="color: green;"><%= exito %></h2>
+        <div class="categorias"> 
+            <a class="header-btn2" href="/">Todos</a>
+            <a class="header-btn2" href="/categoria/television">Televisiones</a>
+            <a class="header-btn2" href="/categoria/computadora">Computadoras</a>
+            <a class="header-btn2" href="/categoria/celular">Celulares</a>
+        </div>
+        <div class="container">
+            <% productos.forEach(e => { %>
+                <div class="container-prods">
+                    <img src= <%= e.thumbnail %>>
+                    <h2> <%= e.title %> </h2>
+                    <h3>Precio: $<%= e.price %> </h3>
+                    <h4>Stock: <%= e.stock %> </h4>
+                    <a class="agregar-carrito" href="/agregar-al-carrito/<%= e.id %>">Añadir al Carrito</a>
+                </div>
+            <% }) %>
+        </div> 
+    </body>
+</html>

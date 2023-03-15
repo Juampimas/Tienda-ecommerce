@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/styles/style.css">
+        <title>Tienda - Chat</title>
+    </head>
+    <body>
+        <%- include("./partials/header") %>  
+        <ul class="lista-grupo"></ul>
+        <form class="form-chat">
+            <label class="label-chat"><%= email %>:</label>
+            <input type="text" class="form-control" placeholder="Ingrese un mensaje">
+            <button class="enviar-chat">Enviar</button>
+        </form>
+        <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+        <script>
+            let socket = io();
+            const form = document.querySelector("form");
+            const input = document.querySelector("input");
+            let mensajes = document.querySelector("ul")
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault()
+                let hoy = new Date();
+                if (input.value) {
+                    let mensajeUsuario = `${input.value}  ${hoy.toLocaleString()}`;
+                    socket.emit("chat", mensajeUsuario)
+                    input.value = ""
+                }
+            })
+
+            socket.on("chat", (msg) => {
+                let item = document.createElement("li");
+                item.textContent = msg;
+                mensajes.appendChild(item)
+            })
+        </script>
+        <script src="./socket.js/chat.js"></script>
+    </body>
+</html>

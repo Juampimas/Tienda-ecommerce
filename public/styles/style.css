@@ -1,0 +1,215 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(213, 213, 213);
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.header{
+    padding: 2em 4em;
+    width: 100%;
+    height: 7em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(37, 97, 218);
+    color: white;
+}
+.header-btn{
+    color: #fff;
+    text-decoration: none;
+}
+.header-btn2{
+    text-decoration: none;
+    font-weight: 700;
+    color: rgb(37, 97, 218);
+    background-color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    padding: 1em 2em;
+}
+.logout{
+    text-decoration: none;
+    font-weight: 700;
+    color: #fff;
+    background-color: rgb(158, 0, 0);
+    border-radius: 30px;
+    cursor: pointer;
+    padding: 1em 2em;
+}
+.confirmacion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+li {
+    color: #000;
+    list-style: none;
+    margin: .5em;
+}
+.categorias{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin-top: 2em;
+}
+.container{
+    width: 100%;
+    height: auto;
+    margin-top: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2em 5em;
+}
+.agregar-carrito{
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(37, 97, 218);
+    border-radius: 30px;
+    cursor: pointer;
+    padding: .5em 1em;
+}
+.no-hay{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3em;
+}
+.item-container{
+    width: 60%;
+    height: auto;
+    margin: 2em auto;
+    margin-top: 4em;
+
+}
+.item-container ul{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.item-container li{
+    border-radius: 10px;
+    padding: 1em 1em;
+    background-color: #fff;
+    margin: 1em 0;
+    height: 4em;
+    width: 100%;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;
+}
+.datos-carrito{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+.item-container li p{
+    font-size: 1.5rem;
+}
+.item-container li strong{
+    font-size: 1.5rem;
+}
+.reducir-item{
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(37, 97, 218);
+    border-radius: 30px;
+    cursor: pointer;
+    padding: .5em 1em;
+}
+.eliminar-item{
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(158, 0, 0);
+    border-radius: 30px;
+    cursor: pointer;
+    padding: .5em 1em;
+}
+.container-prods{
+    border-radius: 10px;
+    background-color: #fff;
+    height: 25em;   
+    width: 20em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 1em;
+    gap: 1em;
+}
+.precio-total{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    margin-bottom: 1em;
+}
+.compra{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+.compra input{
+    font-size: 1.5em;
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(2, 176, 19);
+    border-radius: 30px;
+    cursor: pointer;
+    padding: .5em 1em;
+    border: none;
+}
+.lista-grupo{
+    padding: 1em;
+    border-radius: 10px;
+    margin: 2em auto 0;
+    width: 50%;
+    height: 30em;
+    background-color: #fff;
+}
+.form-chat{
+    width: 50%;
+    height: 3em;
+    margin: 1em auto;
+}
+.label-chat{
+    font-size: 1.5rem;
+}
+.form-control{
+    width: 100%;
+    height: 3em;
+    padding: 1em;
+    border-color: rgb(37, 97, 218);
+    border-radius: 10px;
+    margin: .5em 0;
+    color: #000;
+    list-style: none;
+}
+.enviar-chat{
+    font-size: 1.2em;
+    text-decoration: none;
+    color: #fff;
+    background-color: rgb(37, 97, 218);
+    border-radius: 10px;
+    cursor: pointer;
+    padding: .5em 1em;
+    border: none; 
+}
+.container-prods img{
+    height: 10em;
+}
+
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/login.css">
+    <title>Inicio de sesión</title>
+</head>
+<body>
+    <div class="formulario">
+        <form action="/login" method="post">
+            <h2>Iniciar sesión</h2>
+            <% if (loginMensaje1) { %>
+                <p style="color: red;"> <%= loginMensaje1 %> </p>
+            <% } %>
+            <input type="email" placeholder="Email" id="nombre" name="email" required>
+            <% if (loginMensaje2) { %>
+                <p style="color: red;"> <%= loginMensaje2 %> </p>
+            <% } %>
+            <input type="password" placeholder="Contraseña" id="contraseña" name="password" required>
+            <input type="submit" value="Log In" id="login">
+            <a href="/register">Registrarme</a>
+        </form>
+    </div>
+</body>
+</html>
