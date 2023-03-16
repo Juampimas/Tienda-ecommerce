@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 
 mongoose.set('strictQuery', false)
 
-let database = 'mongodb://localhost:27017/ecommerce';
+let database = 'mongodb://0.0.0.0:27017/ecommerce';
 
 mongoose.connect(database);
 let db = mongoose.connection;
